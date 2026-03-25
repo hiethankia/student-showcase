@@ -60,7 +60,7 @@ const Index = () => {
               { icon: Dumbbell, title: "Weightlifting", desc: "Training consistently to get stronger. It carries over into everything I do." },
             ].map((item) => (
               <div key={item.title} className="bg-card border border-border rounded-lg p-5 card-glow hover-scale cursor-default group">
-                <item.icon size={20} className="text-primary mb-3" />
+                <item.icon size={20} className="text-primary mb-3 transition-transform duration-200 group-hover:scale-110" />
                 <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
               </div>
