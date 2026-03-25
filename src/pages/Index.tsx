@@ -22,7 +22,7 @@ const Index = () => {
             <span className="text-gradient">one step at a time.</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
-            Student-athlete. Academics, wrestling, and weightlifting.
+            Ethan Kia — student-athlete. Academics, wrestling, and weightlifting.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
