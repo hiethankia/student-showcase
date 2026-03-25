@@ -23,13 +23,14 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-medium transition-colors hover:text-primary story-link ${
                 location.pathname === link.to ? "text-primary" : "text-muted-foreground"
               }`}
+              style={{ animationDelay: `${i * 75}ms` }}
             >
               {link.label}
             </Link>
