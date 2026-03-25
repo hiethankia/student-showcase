@@ -4,6 +4,8 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { to: "/", label: "Home" },
+  { to: "/academics", label: "Academics" },
+  { to: "/athletics", label: "Athletics" },
   { to: "/posts", label: "Posts" },
   { to: "/goals", label: "Goals" },
 ];
@@ -20,7 +22,6 @@ const Navbar = () => {
           Portfolio
         </Link>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
@@ -35,13 +36,11 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile toggle */}
         <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="md:hidden glass border-b border-border px-4 pb-4 space-y-2">
           {navLinks.map((link) => (

@@ -39,7 +39,7 @@ const Index = () => {
         <div className="container mx-auto max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-xs font-medium mb-6">
             <BookOpen size={14} />
-            Freshman • Class of 2028
+            Freshman • Class of 2029
           </div>
           <h1 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">
             Building my future,{" "}
@@ -50,16 +50,22 @@ const Index = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              to="/posts"
+              to="/academics"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
             >
-              View Posts <ArrowRight size={16} />
+              Academics <ArrowRight size={16} />
             </Link>
             <Link
-              to="/goals"
+              to="/athletics"
               className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-muted transition-colors"
             >
-              My Goals
+              Athletics
+            </Link>
+            <Link
+              to="/posts"
+              className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-muted transition-colors"
+            >
+              Posts
             </Link>
           </div>
         </div>
