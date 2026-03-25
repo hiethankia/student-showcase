@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border animate-fade-in">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold text-foreground hover:text-primary transition-colors">
-          <img src="/logo.png" alt="Logo" className="w-12 h-12 rounded-full object-cover scale-125" />
+          <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-md object-contain" />
           Portfolio
         </Link>
 
