@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      grades: {
+        Row: {
+          grade_letter: string
+          id: string
+          percentage: number
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          grade_letter: string
+          id?: string
+          percentage: number
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          grade_letter?: string
+          id?: string
+          percentage?: number
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      posts: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          tag: string
+          title: string
+          video_url: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          tag: string
+          title: string
+          video_url?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          tag?: string
+          title?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
