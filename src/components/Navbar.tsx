@@ -15,21 +15,22 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border animate-fade-in">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold text-foreground hover:text-primary transition-colors">
-          <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-md" />
+          <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full object-cover" />
           Portfolio
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-medium transition-colors hover:text-primary story-link ${
                 location.pathname === link.to ? "text-primary" : "text-muted-foreground"
               }`}
+              style={{ animationDelay: `${i * 75}ms` }}
             >
               {link.label}
             </Link>
