@@ -18,12 +18,9 @@ const Athletics = () => {
           {/* Sports */}
           <section className="mb-14">
             <div className="grid sm:grid-cols-2 gap-4">
-              <div className="bg-card border border-border rounded-lg p-6 card-glow">
-                <Trophy size={22} className="text-primary mb-3" />
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">Wrestling</h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Competing on the school wrestling team. Learning discipline, mental toughness, and how to push through when it gets hard.
-                </p>
+              <div className="bg-card border border-border rounded-lg p-6 card-glow hover-scale cursor-default group">
+                <Trophy size={22} className="text-primary mb-3 transition-transform duration-200 group-hover:scale-110" />
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">Wrestling</h3>
                 <ul className="space-y-1.5 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2"><Flame size={14} className="text-primary" />Varsity competitor</li>
                   <li className="flex items-center gap-2"><Flame size={14} className="text-primary" />Building technique and strength</li>
@@ -31,12 +28,9 @@ const Athletics = () => {
                 </ul>
               </div>
 
-              <div className="bg-card border border-border rounded-lg p-6 card-glow">
-                <Dumbbell size={22} className="text-primary mb-3" />
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">Weightlifting</h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  Training consistently to build strength and support wrestling performance. It carries over into everything I do.
-                </p>
+              <div className="bg-card border border-border rounded-lg p-6 card-glow hover-scale cursor-default group">
+                <Dumbbell size={22} className="text-primary mb-3 transition-transform duration-200 group-hover:scale-110" />
+                <h3 className="font-display text-lg font-bold text-foreground mb-3">Weightlifting</h3>
                 <ul className="space-y-1.5 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2"><Flame size={14} className="text-primary" />Consistent training schedule</li>
                   <li className="flex items-center gap-2"><Flame size={14} className="text-primary" />Progressive overload approach</li>
