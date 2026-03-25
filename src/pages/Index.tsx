@@ -55,14 +55,13 @@ const Index = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { icon: BookOpen, title: "Academics", desc: "Staying on top of coursework and pushing for better grades every semester." },
-              { icon: Trophy, title: "Wrestling", desc: "Competing on the school team. Building discipline, toughness, and work ethic on the mat." },
-              { icon: Dumbbell, title: "Weightlifting", desc: "Training consistently to get stronger. It carries over into everything I do." },
+              { icon: BookOpen, title: "Academics" },
+              { icon: Trophy, title: "Wrestling" },
+              { icon: Dumbbell, title: "Weightlifting" },
             ].map((item) => (
               <div key={item.title} className="bg-card border border-border rounded-lg p-5 card-glow hover-scale cursor-default group">
                 <item.icon size={20} className="text-primary mb-3 transition-transform duration-200 group-hover:scale-110" />
-                <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
+                <h3 className="font-display font-semibold text-foreground">{item.title}</h3>
               </div>
             ))}
           </div>

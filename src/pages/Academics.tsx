@@ -72,7 +72,7 @@ const Academics = () => {
                 { title: "No Missing Work", desc: "Stay organized. Turn everything in on time." },
                 { title: "A's in Core Classes", desc: "Focus on doing well in required courses." },
               ].map((goal) => (
-                <div key={goal.title} className="bg-card border border-border rounded-lg p-5 card-glow">
+                <div key={goal.title} className="bg-card border border-border rounded-lg p-5 card-glow hover-scale cursor-default group">
                   <CheckCircle2 size={16} className="text-primary mb-2" />
                   <h3 className="font-display font-semibold text-foreground mb-1">{goal.title}</h3>
                   <p className="text-sm text-muted-foreground">{goal.desc}</p>
