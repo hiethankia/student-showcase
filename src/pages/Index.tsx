@@ -1,41 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroGlow from "@/components/HeroGlow";
-import GradeCard from "@/components/GradeCard";
 import { ArrowRight, Dumbbell, Trophy, BookOpen, Target } from "lucide-react";
 
-interface Grade {
-  id: string;
-  subject: string;
-  grade_letter: string;
-  percentage: number;
-}
-
 const Index = () => {
-  const [grades, setGrades] = useState<Grade[]>([]);
-
-  useEffect(() => {
-    const fetchGrades = async () => {
-      const { data } = await supabase.from("grades").select("*").order("subject");
-      if (data) setGrades(data);
-    };
-    fetchGrades();
-  }, []);
-
-  const avgGrade = grades.length > 0
-    ? (grades.reduce((sum, g) => sum + g.percentage, 0) / grades.length).toFixed(1)
-    : "—";
-
   return (
     <div className="min-h-screen bg-background">
       <HeroGlow />
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-20 px-4">
+      <section className="relative pt-32 pb-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-xs font-medium mb-6">
             <BookOpen size={14} />
@@ -72,7 +48,7 @@ const Index = () => {
       </section>
 
       {/* Highlights */}
-      <section className="py-16 px-4">
+      <section className="py-14 px-4">
         <div className="container mx-auto max-w-4xl">
           <h2 className="font-display text-2xl font-bold text-foreground mb-8 text-center">
             What I'm About
@@ -93,30 +69,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Grades */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="font-display text-2xl font-bold text-foreground">Current Grades</h2>
-              <p className="text-sm text-muted-foreground mt-1">Average: {avgGrade}%</p>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {grades.map((g) => (
-              <GradeCard
-                key={g.id}
-                subject={g.subject}
-                gradeLetter={g.grade_letter}
-                percentage={g.percentage}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Goals preview */}
-      <section className="py-16 px-4">
+      <section className="py-14 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <Target size={24} className="text-primary mx-auto mb-4" />
           <h2 className="font-display text-2xl font-bold text-foreground mb-2">Goals & Strengths</h2>
