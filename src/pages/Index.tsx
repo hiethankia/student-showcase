@@ -39,7 +39,7 @@ const Index = () => {
         <div className="container mx-auto max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-xs font-medium mb-6">
             <BookOpen size={14} />
-            Freshman • Class of 2028
+            Freshman • Class of 2029
           </div>
           <h1 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">
             Building my future,{" "}
