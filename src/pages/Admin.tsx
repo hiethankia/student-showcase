@@ -59,13 +59,8 @@ const Admin = () => {
   const handleAuth = async () => {
     setAuthLoading(true);
     setAuthError("");
-    if (isSignUp) {
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) setAuthError(error.message);
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) setAuthError(error.message);
-    }
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) setAuthError(error.message);
     setAuthLoading(false);
   };
 
