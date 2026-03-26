@@ -8,6 +8,7 @@ import Posts from "./pages/Posts";
 import Goals from "./pages/Goals";
 import Academics from "./pages/Academics";
 import Athletics from "./pages/Athletics";
+import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
