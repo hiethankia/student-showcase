@@ -56,11 +56,16 @@ const Admin = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleLogin = async () => {
+  const handleAuth = async () => {
     setAuthLoading(true);
     setAuthError("");
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) setAuthError(error.message);
+    if (isSignUp) {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) setAuthError(error.message);
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) setAuthError(error.message);
+    }
     setAuthLoading(false);
   };
 
