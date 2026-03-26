@@ -182,13 +182,7 @@ const Admin = () => {
             disabled={authLoading}
             className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {authLoading ? "Loading..." : isSignUp ? "Create Account" : "Sign In"}
-          </button>
-          <button
-            onClick={() => { setIsSignUp(!isSignUp); setAuthError(""); }}
-            className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {isSignUp ? "Already have an account? Sign in" : "Need an account? Sign up"}
+            {authLoading ? "Loading..." : "Sign In"}
           </button>
         </div>
       </div>
