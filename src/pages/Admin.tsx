@@ -27,6 +27,7 @@ const Admin = () => {
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   // Posts
   const [posts, setPosts] = useState<Post[]>([]);
