@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PostCard from "@/components/PostCard";
+import { Settings } from "lucide-react";
 
 const tags = ["All", "Academics", "Athletics", "Random"];
 
@@ -35,7 +37,15 @@ const Posts = () => {
       <Navbar />
       <div className="pt-24 pb-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h1 className="font-display text-3xl font-bold text-foreground mb-2">Posts</h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="font-display text-3xl font-bold text-foreground">Posts</h1>
+            <Link
+              to="/admin"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors bg-secondary rounded-md px-3 py-2"
+            >
+              <Settings size={16} /> Manage
+            </Link>
+          </div>
           <p className="text-muted-foreground mb-8">Updates, thoughts, and highlights.</p>
 
           {/* Filter tabs */}
