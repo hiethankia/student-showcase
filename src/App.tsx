@@ -8,6 +8,7 @@ import Posts from "./pages/Posts";
 import Goals from "./pages/Goals";
 import Academics from "./pages/Academics";
 import Athletics from "./pages/Athletics";
+import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/goals" element={<Goals />} />
           <Route path="/academics" element={<Academics />} />
           <Route path="/athletics" element={<Athletics />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

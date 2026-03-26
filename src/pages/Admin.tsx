@@ -59,13 +59,8 @@ const Admin = () => {
   const handleAuth = async () => {
     setAuthLoading(true);
     setAuthError("");
-    if (isSignUp) {
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) setAuthError(error.message);
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) setAuthError(error.message);
-    }
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) setAuthError(error.message);
     setAuthLoading(false);
   };
 
@@ -164,12 +159,8 @@ const Admin = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="bg-card border border-border rounded-lg p-8 w-full max-w-sm">
-          <h1 className="font-display text-xl font-bold text-foreground mb-2">
-            {isSignUp ? "Create Admin Account" : "Admin Login"}
-          </h1>
-          <p className="text-sm text-muted-foreground mb-6">
-            {isSignUp ? "Create your account to get started." : "Sign in to manage your site."}
-          </p>
+          <h1 className="font-display text-xl font-bold text-foreground mb-2">Admin Login</h1>
+          <p className="text-sm text-muted-foreground mb-6">Sign in to manage your site.</p>
           <input
             type="email"
             value={email}
@@ -191,13 +182,7 @@ const Admin = () => {
             disabled={authLoading}
             className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {authLoading ? "Loading..." : isSignUp ? "Create Account" : "Sign In"}
-          </button>
-          <button
-            onClick={() => { setIsSignUp(!isSignUp); setAuthError(""); }}
-            className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {isSignUp ? "Already have an account? Sign in" : "Need an account? Sign up"}
+            {authLoading ? "Loading..." : "Sign In"}
           </button>
         </div>
       </div>
