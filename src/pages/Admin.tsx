@@ -164,8 +164,12 @@ const Admin = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="bg-card border border-border rounded-lg p-8 w-full max-w-sm">
-          <h1 className="font-display text-xl font-bold text-foreground mb-2">Admin Login</h1>
-          <p className="text-sm text-muted-foreground mb-6">Sign in to manage your site.</p>
+          <h1 className="font-display text-xl font-bold text-foreground mb-2">
+            {isSignUp ? "Create Admin Account" : "Admin Login"}
+          </h1>
+          <p className="text-sm text-muted-foreground mb-6">
+            {isSignUp ? "Create your account to get started." : "Sign in to manage your site."}
+          </p>
           <input
             type="email"
             value={email}
@@ -177,17 +181,23 @@ const Admin = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            onKeyDown={(e) => e.key === "Enter" && handleAuth()}
             placeholder="Password"
             className="w-full bg-secondary border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground mb-3 outline-none focus:ring-1 focus:ring-primary"
           />
           {authError && <p className="text-destructive text-xs mb-3">{authError}</p>}
           <button
-            onClick={handleLogin}
+            onClick={handleAuth}
             disabled={authLoading}
             className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {authLoading ? "Signing in..." : "Sign In"}
+            {authLoading ? "Loading..." : isSignUp ? "Create Account" : "Sign In"}
+          </button>
+          <button
+            onClick={() => { setIsSignUp(!isSignUp); setAuthError(""); }}
+            className="w-full mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {isSignUp ? "Already have an account? Sign in" : "Need an account? Sign up"}
           </button>
         </div>
       </div>
