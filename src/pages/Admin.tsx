@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Trash2, Plus, LogOut, Save } from "lucide-react";
+import type { User } from "@supabase/supabase-js";
 
 interface Post {
   id: string;
@@ -19,12 +20,13 @@ interface Grade {
   percentage: number;
 }
 
-const ADMIN_CODE = "GodIsGreat";
-
 const Admin = () => {
-  const [authed, setAuthed] = useState(false);
-  const [code, setCode] = useState("");
-  const [error, setError] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [authError, setAuthError] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
 
   // Posts
   const [posts, setPosts] = useState<Post[]>([]);
@@ -39,32 +41,37 @@ const Admin = () => {
   const [grades, setGrades] = useState<Grade[]>([]);
   const [savingGrades, setSavingGrades] = useState(false);
 
-  const handleLogin = () => {
-    if (code === ADMIN_CODE) {
-      setAuthed(true);
-      setError("");
-      sessionStorage.setItem("admin_auth", "true");
-    } else {
-      setError("Incorrect code.");
-    }
-  };
-
-  const handleLogout = () => {
-    setAuthed(false);
-    sessionStorage.removeItem("admin_auth");
-  };
-
   useEffect(() => {
-    if (sessionStorage.getItem("admin_auth") === "true") {
-      setAuthed(true);
-    }
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
+  const handleLogin = async () => {
+    setAuthLoading(true);
+    setAuthError("");
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) setAuthError(error.message);
+    setAuthLoading(false);
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
   useEffect(() => {
-    if (!authed) return;
+    if (!user) return;
     fetchPosts();
     fetchGrades();
-  }, [authed]);
+  }, [user]);
 
   const fetchPosts = async () => {
     const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
@@ -91,10 +98,8 @@ const Admin = () => {
     try {
       let imageUrl: string | null = null;
       let videoUrl: string | null = null;
-
       if (imageFile) imageUrl = await uploadFile(imageFile, "images");
       if (videoFile) videoUrl = await uploadFile(videoFile, "videos");
-
       await supabase.from("posts").insert({
         title: title.trim(),
         content: content.trim() || null,
@@ -102,7 +107,6 @@ const Admin = () => {
         image_url: imageUrl,
         video_url: videoUrl,
       });
-
       setTitle("");
       setContent("");
       setTag("Academics");
@@ -141,27 +145,43 @@ const Admin = () => {
     setSavingGrades(false);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
   // Login screen
-  if (!authed) {
+  if (!user) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="bg-card border border-border rounded-lg p-8 w-full max-w-sm">
-          <h1 className="font-display text-xl font-bold text-foreground mb-2">Admin Access</h1>
-          <p className="text-sm text-muted-foreground mb-6">Enter the access code to continue.</p>
+          <h1 className="font-display text-xl font-bold text-foreground mb-2">Admin Login</h1>
+          <p className="text-sm text-muted-foreground mb-6">Sign in to manage your site.</p>
           <input
-            type="password"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-            placeholder="Access code"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
             className="w-full bg-secondary border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground mb-3 outline-none focus:ring-1 focus:ring-primary"
           />
-          {error && <p className="text-destructive text-xs mb-3">{error}</p>}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            placeholder="Password"
+            className="w-full bg-secondary border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground mb-3 outline-none focus:ring-1 focus:ring-primary"
+          />
+          {authError && <p className="text-destructive text-xs mb-3">{authError}</p>}
           <button
             onClick={handleLogin}
-            className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:opacity-90 transition-opacity"
+            disabled={authLoading}
+            className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            Enter
+            {authLoading ? "Signing in..." : "Sign In"}
           </button>
         </div>
       </div>
